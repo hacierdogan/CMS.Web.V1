@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<html lang="@HttpContext.Current.Session["CurrentLanguageCode"]">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title | Web</title>
+
+    @{Html.RenderAction("_SeoSetting", "Partial");}
+    <!-- Favicon -->
+    <link rel="icon" href="/Content/Admin/img/logo.jpg" />
+    <!--Bootstrap-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/bootstrap.css">
+    <!--Font-Awesome-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/font-awesome.css">
+    <!--Animation-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/animate.css">
+    <!--Prettyphoto-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/prettyPhoto.css">
+    <!--Owl-Slider-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/owl.transitions.css">
+    <!--Flag css-->
+    <link href="~/Content/css/flag-icon.css" rel="stylesheet" />
+
+    <!--Angular JS-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>-->
+    <script src="~/Scripts/angularjs/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/Angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+
+    <!-- Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body, p, span, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+    <!--Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/style.css?@HttpContext.Current.Application["CSSVer"]">
+    <link rel="stylesheet/less" type="text/css" href="/Content/css/themecolor.less">
+
+    <!--Responsive-->
+    <link rel="stylesheet" type="text/css" href="/Content/css/responsive.css?@HttpContext.Current.Application["CSSVer"]">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+      [endif]-->
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    @RenderSection("Styles", required: false)
+
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar-default" data-offset="100" ng-app="ngApp">
+
+
+    <header id="menu" ng-controller="layoutController">
+
+        @{Html.RenderAction("_PageLoader", "Partial");}
+
+        @{Html.RenderAction("_Menu", "Partial");}
+
+    </header>
+
+    @RenderBody()
+
+    <footer ng-controller="footerController">
+        @{Html.RenderAction("_Footer", "Partial");}
+
+    </footer>
+
+    <!--Jquery-->
+    <script type="text/javascript" src="~/Scripts/js/jquery.min.js"></script>
+    <!--Boostrap-Jquery-->
+    <script type="text/javascript" src="~/Scripts/js/bootstrap.js"></script>
+    <!--Preetyphoto-Jquery-->
+    <script type="text/javascript" src="~/Scripts/js/jquery.prettyPhoto.js"></script>
+    <!--Isotopes-->
+    <script type="text/javascript" src="~/Scripts/js/jquery.isotope.js"></script>
+    <!--SweetAlert-->
+    <script src="~/Content/Admin/vendors/sweetalert/sweetalert.min.js"></script>
+    <!--Wow-Jquery-->
+    <script type="text/javascript" src="~/Scripts/js/wow.js"></script>
+    <!--Count-Jquey-->
+    <script type="text/javascript" src="~/Scripts/js/jquery.countTo.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/jquery.inview.min.js"></script>
+    <!--Owl-Crousels-Jqury-->
+    <script type="text/javascript" src="~/Scripts/js/owl.carousel.js"></script>
+    <!--Less Style JS-->
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    @*<script type="text/javascript" src="~/Scripts/js/less.min.js"></script>*@
+    <!--Main-Scripts-->
+    <script src="~/Scripts/site-script.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <!--Angular-->
+    <script src="~/Scripts/angularApp.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+    <script src="~/Scripts/Pages/layout.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+
+<!-- End Of Analytics Code -->
+@*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+
+

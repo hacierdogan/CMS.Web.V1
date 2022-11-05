@@ -1,0 +1,31 @@
+﻿@using CMS.Web.V1.Models.Helper
+<section id="blog">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="heading">
+                <h2>@(("Home.Blog.Title").toLanguage())</h2>
+                <div class="line"></div>
+                <p>
+                    @(("Home.Blog.Description").toLanguage())
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="owl-news" class="owl-carousel owl-theme">
+                    <div class="item" ng-repeat="news in blogOrNewsList" on-finish-render="ngNewsFinished">
+                        <div class="blog-info">
+                            <img ng-src="{{news.PicturePath}}" class="img-responsive" alt="">
+                            <div class="data-meta">
+                                {{news.CreatedDateStr}}
+                            </div>
+                            <h5>{{news.Detail[0].Title}}</h5>
+                            <p ng-bind-html="news.Detail[0].Description"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

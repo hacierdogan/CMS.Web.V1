@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Slider İşlemleri";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Slider İşlemleri</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Slider Listesi</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="sliderController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Slider Listesi</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="text-right mb-3">
+                <button class="btn btn-success btn-sm" ng-click="newSlider()" data-toggle="modal">
+                    <i class="fa fa-plus-square-o"></i> Yeni Ekle
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="slider-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="15px">No</th>
+                            <th class="text-center" width="120px">Resim</th>
+                            <th class="text-center" width="60px">Durum</th>
+                            <th class="text-center" width="60px">Sıralama</th>
+                            <th class="text-center">Tanım</th>
+                            <th class="text-center">Başlangıç Tarihi</th>
+                            <th class="text-center">Bitiş Tarihi</th>
+                            <th class="text-center" width="70px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sliderItem in sliderList" on-finish-render="ngRepeatSliderListFinished">
+                            <td class="text-center">{{$index+1}}</td>
+                            <td class="text-center"><img ng-src="{{sliderItem.PicturePath}}" class="img-responsive datatable-image" alt="slider" id="sliderImage" /></td>
+                            <td class="text-center">
+                                <span ng-show="sliderItem.Status" class="text-success"><i class="fa fa-check"></i></span>
+                                <span ng-show="!sliderItem.Status" class="text-danger"><i class="fa fa-ban"></i></span>
+                            </td>
+                            <td class="text-center">{{sliderItem.DisplayOrder}}</td>
+                            <td>{{sliderItem.Name}}</td>
+                            <td class="text-center">{{sliderItem.StartDate | date:'dd.MM.yyyy'}}</td>
+                            <td class="text-center">{{sliderItem.EndDate | date:'dd.MM.yyyy'}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-xs btn-primary" ng-click="updateSlider(sliderItem)"><i class="fa fa-pencil"></i></button>
+                                <button class="btn btn-xs btn-danger" ng-click="deleteSlider(sliderItem)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+
+                        <tr ng-if="sliderList.length==0">
+                            <td colspan="8" class="text-danger"> Görüntülenecek içerik bulunamadı.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="exampleModalLabel">Slider</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pb-0">
+                    <div class="form-horizontal row">
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="form-group row">
+                                <label class="col-sm-3" for="LangCode">Tanım</label>
+                                <div class="col-sm-9">
+                                    <input type="hidden" class="form-control" id="sliderId" ng-model="slider.Id" value="0">
+                                    <input type="text" class="form-control" id="sliderName" ng-model="slider.Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group mb-0">
+                                <img ng-src="{{slider.PicturePath}}" class="img-responsive " alt="slider" id="sliderImg" />
+                                <input type="file" name="imageInput" id="imageInput" value="" accept=".jpg,.png,.JPEG,.jpeg" class="hidden" />
+                                <label for="imageInput" class="resimsec"><i class="fa fa-upload"></i> Resim Seç</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-normal">Gösterim Tarihi</label>
+                                <div class="input-daterange input-group" id="datepicker">
+                                    <input class="input-sm form-control" type="text" name="startDate" id="startDate" value="{{slider.StartDateStr}}" ng-model="slider.StartDateStr">
+                                    <span class="input-group-addon p-l-10 p-r-10">to</span>
+                                    <input class="input-sm form-control" type="text" name="endDate" id="endDate" value="{{slider.EndDateStr}}" ng-model="slider.EndDateStr">
+                                </div>
+                            </div>
+                            <div class="form-group mb-0 row">
+                                <label class="col-sm-3">Görünüm</label>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label class="chkswitch">
+                                            <input type="checkbox" id="Status" name="Status" ng-model="slider.Status">
+                                            <span class="swtslider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <label class="col-sm-3">Sıralama</label>
+                                <div class="col-sm-3">
+                                    <input type="number" min="0" maxlength="3" class="form-control" id="DisplayOrder" ng-model="slider.DisplayOrder">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="ibox bg-silver-100 mb-0">
+                                <div class="ibox-head">
+                                    <div class="ibox-title">Metinler</div>
+                                    <ul class="nav nav-tabs tabs-line pull-right">
+                                        <li class="nav-item" ng-repeat="lang in languageList">
+                                            <a class="nav-link" data-toggle="tab" href="#menu{{lang.Id}}">{{lang.LangName}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ibox-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="menu{{lang.Id}}" ng-repeat="lang in languageList" on-finish-render="ngRepeatDetailFinished" ng-if="newslider">
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{lang.LangName}} Başlık</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="sliderTitle-{{lang.Id}}" data-sliderId="0" data-langNo="{{lang.Id}}" ng-model="lang.Title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{lang.LangName}} Alt Başlık</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="sliderSubTitle-{{lang.Id}}" ng-model="lang.SubTitle">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{lang.LangName}} Açıklama</label>
+                                                <div class="col-sm-12">
+                                                    <textarea class="form-control" id="sliderDescription-{{lang.Id}}" ng-model="lang.Description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="menu{{detail.LanguageId}}" ng-repeat="detail in slider.Detail" on-finish-render="ngRepeatDetailFinished" ng-if="!newslider">
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{detail.Language}} Başlık</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="sliderTitle-{{detail.LanguageId}}" data-langNo="{{detail.LanguageId}}" ng-model="detail.Title">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{detail.Language}} Alt Başlık</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" id="sliderSubTitle-{{detail.LanguageId}}" ng-model="detail.SubTitle">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-12" for="LangCode">{{detail.Language}} Açıklama</label>
+                                                <div class="col-sm-12">
+                                                    <textarea class="form-control" id="sliderDescription-{{detail.LanguageId}}" ng-model="detail.Description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-success" ng-click="saveSlider()">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section PageLevelStyles{
+    <link href="~/Content/Admin/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+}
+@section PageLevelScripts
+{
+    <script src="~/Content/Admin/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/Admin/vendors/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js" type="text/javascript"></script>
+    <script src="~/Content/Admin/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/Admin/slider.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.input-daterange').datepicker({
+                keyboardNavigation: false,
+                language: 'tr',
+                forceParse: false,
+                autoclose: true
+            });
+
+        });
+
+    </script>
+}
+

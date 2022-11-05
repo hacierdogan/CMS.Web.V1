@@ -1,0 +1,20 @@
+﻿<section id="slider">
+    <div id="home-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div ng-class="$index==0?'item active':'item'" ng-style="{'background-image': 'url(' + slider.PicturePath + ')'}" ng-repeat="slider in sliderList" >
+                <div class="carousel-caption container">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <h1>{{slider.Detail[0].SubTitle}}</h1>
+                            <h2>{{slider.Detail[0].Title}}</h2>
+                            <p>{{slider.Detail[0].Description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a ng-if="sliderList.length>1" class="home-carousel-left" href="#home-carousel" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+            <a ng-if="sliderList.length>1" class="home-carousel-right" href="#home-carousel" data-slide="next"><i class="fa fa-angle-right"></i></a>
+        </div>
+    </div>
+</section>

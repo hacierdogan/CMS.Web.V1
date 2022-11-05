@@ -1,0 +1,74 @@
+﻿<nav class="page-sidebar" id="sidebar">
+    <div id="sidebar-collapse">
+        <div class="admin-block d-flex">
+            <div>
+                <img src="~/Content/Admin/img/logo.jpg" width="45" />
+            </div>
+            <div class="admin-info">
+                <div class="font-strong">{{authorityUser.Name}}</div><small>{{authorityUser.Role}}</small>
+            </div>
+        </div>
+        <ul class="side-menu metismenu">
+            <li><a href="/admin/home"><i class="sidebar-item-icon fa fa-th-large"></i><span class="nav-label">Gösterge</span></a></li>
+            <li class="heading">İçerikler</li>
+            <li><a href="/admin/message"><i class="sidebar-item-icon fa fa-envelope-o"></i><span class="nav-label">Mesaj İşlemleri</span></a></li>
+            <li><a href="/admin/slider"><i class="sidebar-item-icon fa fa-play-circle-o"></i><span class="nav-label">Slider İşlemleri</span></a></li>
+            <li><a href="/admin/gallery"><i class="sidebar-item-icon fa fa-picture-o"></i><span class="nav-label">Galeri İşlemleri</span></a></li>
+            <li><a href="/admin/popup"><i class="sidebar-item-icon fa fa-window-restore"></i><span class="nav-label">Popup İşlemleri</span></a></li>
+            <li>
+                <a href="javascript:;">
+                    <i class="sidebar-item-icon fa fa-edit"></i>
+                    <span class="nav-label">Sabitler</span><i class="fa fa-angle-left arrow"></i>
+                </a>
+                <ul class="nav-2-level collapse">
+                    <li>
+                        <a href="/admin/content?page=About"><i class="fa fa-caret-right" aria-hidden="true"></i> Hakkımızda</a>
+                    </li>
+                    <li>
+                        <a href="/admin/ourservice"><i class="fa fa-caret-right" aria-hidden="true"></i> Hizmetler</a>
+                    </li>
+                    <li>
+                        <a href="/admin/content?page=Tab"><i class="fa fa-caret-right" aria-hidden="true"></i> Tab Menü İçerikleri</a>
+                    </li>
+                    <li>
+                        <a href="/admin/content?page=Blog"><i class="fa fa-caret-right" aria-hidden="true"></i> Blog & Haber</a>
+                    </li>
+
+                    <li>
+                        <a href="/admin/referance"><i class="fa fa-caret-right" aria-hidden="true"></i> Referanslar</a>
+                    </li>
+                    <li>
+                        <a href="/admin/socialmedia"><i class="fa fa-caret-right" aria-hidden="true"></i> Sosyal Medya</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="sidebar-item-icon fa fa-language"></i>
+                    <span class="nav-label">Dil İşlemleri</span><i class="fa fa-angle-left arrow"></i>
+                </a>
+                <ul class="nav-2-level collapse">
+                    <li>
+                        <a href="/admin/language"><i class="fa fa-caret-right" aria-hidden="true"></i> Dil Listesi</a>
+                    </li>
+                    <li>
+                        <a href="/admin/language/resource"><i class="fa fa-caret-right" aria-hidden="true"></i> Dil Çevirileri</a>
+                    </li>
+                    <li>
+                        <a href="/admin/language/importexcelresource"> <i class="fa fa-caret-right" aria-hidden="true"></i> Toplu Çeviri Girişi</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li><a href="/admin/companyinformation"><i class="sidebar-item-icon fa fa-diamond"></i><span class="nav-label">Firma Bilgileri</span></a></li>
+            @if (User.IsInRole("Administrator"))
+            {
+                <li><a href="/admin/loggeneral"><i class="sidebar-item-icon fa fa-exclamation-triangle"></i><span class="nav-label">Log Kayıtları</span></a></li>
+            }
+            <li class="heading">Ayarlar</li>
+            <li><a href="/admin/mailsetting"><i class="sidebar-item-icon fa fa-envelope-o"></i><span class="nav-label">Mail Server</span></a></li>
+            <li><a href="/admin/seosetting"><i class="sidebar-item-icon fa fa-tag"></i><span class="nav-label">Seo Ayarları</span></a></li>
+            <li><a href="/admin/themesetting"><i class="sidebar-item-icon fa fa-cogs"></i><span class="nav-label">Tema Ayarları</span></a></li>
+        </ul>
+    </div>
+</nav>

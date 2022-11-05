@@ -1,0 +1,13 @@
+﻿<div id="client">
+    <div class="container">
+        <div id="reference-slider" class="owl-carousel">
+            <div class="item client-logo" ng-repeat=" reference in referenceList" on-finish-render="ngRepeatReferenceFinished">
+                <a href="{{reference.Url}}" target="_blank">
+                    <img ng-src="{{reference.PicturePath}}" class="img-responsive" alt="{{reference.Title}}" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

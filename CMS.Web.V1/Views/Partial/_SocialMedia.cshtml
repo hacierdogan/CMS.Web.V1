@@ -1,0 +1,9 @@
+﻿@using CMS.Web.V1.Models.Helper
+<h2>@(("Layout.Social.Media.Title").toLanguage())</h2>
+<ul class="social-icon">
+    <li ng-if="socialMedia.IsFacebook" class="facebook hvr-pulse"><a href="{{socialMedia.FacebookUrl}}" target="_blank"><i class="fa fa-facebook-f"></i></a></li>
+    <li ng-if="socialMedia.IsTwitter" class="twitter hvr-pulse"><a href="{{socialMedia.TwitterUrl}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+    <li ng-if="socialMedia.IsInstagram" class="instagram hvr-pulse"><a href="{{socialMedia.InstagramUrl}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+    <li ng-if="socialMedia.IsLinkedin" class="linkedin hvr-pulse"><a href="{{socialMedia.LinkedinUrl}}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+    <li ng-if="socialMedia.IsYoutube" class="youtube hvr-pulse"><a href="{{socialMedia.YoutubeUrl}}" target="_blank"><i class="fa fa-youtube"></i></a></li>
+</ul>

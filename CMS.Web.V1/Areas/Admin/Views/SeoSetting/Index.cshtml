@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Seo Ayarları";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Seo Ayarları</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Seo Ayarları</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="seoSettingController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Seo Ayarları</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="form-horizontal row">
+                <div class="col-sm-12">
+                    <div class="form-group row mt-4">
+                        <label class="col-sm-3" for="LangCode">Önizleme</label>
+                        <div class="col-sm-9">
+                            <div class="searchview">
+                                <p>http://cms.com.tr</p>
+                                <h3>{{seo.Title}}</h3>
+                                <span>{{seo.Description}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-5">
+                        <label class="col-sm-3" for="LangCode">Site Başlığı</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="seo.Title" aria-describedby="basic-addon2" maxlength="60">
+                            <small class="help-block text-muted">Tavsiye edilen uzunluktan kalan karakter {{60-seo.Title.length}}</small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Site Açıklaması</label>
+                        <div class="col-sm-9">
+                                <textarea class="form-control" ng-model="seo.Description" maxlength="160"></textarea>
+                            <small class="help-block text-muted">Tavsiye edilen uzunluktan kalan karakter {{160-seo.Description.length}}</small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Site Anahtar Kelimeleri</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="seo.Keywords">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Site Sahibi</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="seo.Owner">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Site Yöneticisi</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="seo.Author">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode" maxlength="160">Site Kuruluş Yılı</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="seo.Year">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">GoogleAnalytic Kodu</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" ng-model="seo.GoogleAnalytic"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 row">
+                        <div class="col-sm-12 text-right">
+                            <button type="button" class="btn btn-success" ng-click="saveSeoSetting()">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageLevelStyles{
+}
+@section PageLevelScripts
+{
+    <script src="~/Scripts/Admin/seosetting.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        });
+    </script>
+}
+

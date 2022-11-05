@@ -1,0 +1,62 @@
+﻿@using CMS.Web.V1.Models.Helper
+<section id="contact">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="heading">
+                <h2>@(("Home.Contact.Title").toLanguage())</h2>
+                <div class="line"></div>
+                <p>
+                    @(("Home.Contact.Description").toLanguage())
+                </p>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="col-md-6 col-sm-6 contact-sec-1">
+                <h4>@(("Home.Contact.Info").toLanguage())</h4>
+                <ul class="contact-form">
+                    <li>
+                        <i class="fa fa-map-marker"></i>
+                        <h6><strong>@(("Contact.Address").toLanguage())</strong> <span>{{company.Address}}</span> </h6>
+                    </li>
+                    <li>
+                        <i class="fa fa-envelope"></i>
+                        <h6><strong>@(("Contact.Email").toLanguage())</strong> <span><a href="#">{{company.Mail}}</a></span></h6>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone"></i>
+                        <h6><strong>@(("Contact.Phone").toLanguage())</strong><span> {{company.Phone}} </span></h6>
+                    </li>
+                    <li>
+                        <i class="fa fa-fax"></i>
+                        <h6><strong>@(("Contact.Fax").toLanguage())</strong><span> {{company.Fax}} </span></h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <form id="main-contact-form" name="contact-form" method="post" action="#">
+                    <div class="row  wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="name" ng-model="message.Title" class="form-control" placeholder="@(("Contact.Form.Name").toLanguage())" required="required">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="email" name="email" ng-model="message.Mail" class="form-control" placeholder="@(("Contact.Form.Email").toLanguage())" required="required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" ng-model="message.Subject" class="form-control" placeholder="@(("Contact.Form.Subject").toLanguage())" required="required">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message" ng-model="message.MessageStr" class="form-control" rows="4" placeholder="@(("Contact.Form.Message").toLanguage())" required="required"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn-send btn-block cp" ng-click="sendMessage()">@(("Contact.Form.Sender").toLanguage())</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

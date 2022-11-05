@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Log KAyıtları";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-heading">
+    <h1 class="page-title">Log Kayıtları</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Log Listesi</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="loggeneralController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Log Listesi</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="form-group col-sm-6">
+                <div class="m-b-10">
+                    <label class="ui-radio ui-radio-inline  ui-radio-primary">
+                        <input id="logType0" name="logType" ng-model="logType" ng-change="getLogList(0)" ng-checked="logType==0" type="radio">
+                        <span class="input-span"></span>Tüm loglar
+                    </label>
+                    <label class="ui-radio ui-radio-inline  ui-radio-primary">
+                        <input id="logType1" name="logType" ng-model="logType" ng-change="getLogList(1)" ng-checked="logType==1" type="radio">
+                        <span class="input-span"></span>Uyarı logları
+                    </label>
+                    <label class="ui-radio ui-radio-inline  ui-radio-primary">
+                        <input id="logType2" name="logType" ng-model="logType" ng-change="getLogList(2)" ng-checked="logType==2" type="radio">
+                        <span class="input-span"></span>Hata logları
+                    </label>
+                </div>
+            </div>
+            <div class="alert alert-bordered p-1 mb-0" ng-repeat="logItem in logList" ng-class="logItem.LogType==0?' alert-danger':' alert-warning'">
+                <span class="badge" ng-class="logItem.LogType==0?' badge-danger':' badge-warning'">{{logItem.DateTime | date:'dd.MM.yyyy HH:mm'}} - {{logItem.ClientStr}} - {{logItem.LogTypeStr}} - {{logItem.IpAddress}}</span>
+                <span class="badge cp logdetailbtn" ng-class="logItem.LogType==0?' badge-danger':' badge-warning'" ng-click="logDetail(logItem.Explanation)" title="Log Detay"><i class="fa fa-eye"></i></span>
+                <br />
+                <small><strong>{{logItem.Source}}</strong> : {{logItem.Message}}</small>
+            </div>
+
+            <p ng-if="logList.length==0" }}" class="text-danger">Görüntülenecek kayıt bulunamadı.</p>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="logModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="logModalLabel">Log Detay</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="plogdetail">
+                        {{logExplanation}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section PageLevelStyles{
+
+}
+@section PageLevelScripts
+{
+    <script src="~/Scripts/Admin/loggeneral.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}
+
+

@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "Popup İşlemleri";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Popup İşlemleri</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Popup Düzenle</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="popupController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Popup Düzenle</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="popup-form">
+                <div class="form-horizontal row">
+
+                    <div class="form-group col-sm-6">
+                        <input type="hidden" ng-model="popup.Id">
+                        <img ng-src="{{popup.PicturePath}}" class="img-responsive" alt="popup" id="fileImg" />
+                        <input type="file" name="imageInput" id="imageInput" value="" accept=".jpg,.png,.JPEG,.jpeg" class="hidden" />
+                        <label for="imageInput" class="resimsec mb-0"><i class="fa fa-upload"></i> Resim Seç</label>
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label class="font-strong">Popup Türü</label>
+                        <div class="check-list">
+                            <label class="ui-radio ui-radio-primary">
+                                <input id="popupType0" name="popupType" ng-model="popup.Type" ng-change="popup.Type=0" ng-checked="popup.Type==0" type="radio">
+                                <span class="input-span"></span>Sadece resim gösterilsin.
+                            </label>
+                            <label class="ui-radio ui-radio-primary">
+                                <input id="popupType1" name="popupType" ng-model="popup.Type" ng-change="popup.Type=1" ng-checked="popup.Type==1" type="radio">
+                                <span class="input-span"></span>Sadece yazı gösterilsin.
+                            </label>
+                            <label class="ui-radio ui-radio-primary">
+                                <input id="popupType2" name="popupType" ng-model="popup.Type" ng-change="popup.Type=2" ng-checked="popup.Type==2" type="radio">
+                                <span class="input-span"></span>Resim ve yazı gösterilsin.
+                            </label>
+                        </div>
+
+                        <label class="font-strong mt-3">Popup Boyutu</label>
+                        <div class="check-list">
+                            <label class="ui-radio ui-radio-primary">
+                                <input id="popupSize0" name="popupSize" ng-model="popup.Size" ng-change="popup.Size=false" ng-checked="popup.Size==false" type="radio">
+                                <span class="input-span"></span>Küçük
+                            </label>
+                            <label class="ui-radio ui-radio-primary">
+                                <input id="popupSize1" name="popupSize" ng-model="popup.Size" ng-change="popup.Size=true" ng-checked="popup.Size==true" type="radio">
+                                <span class="input-span"></span>Büyük
+                            </label>
+                        </div>
+                        <label class="font-strong mt-3">Görünüm</label>
+                        <div class="">
+                            <div class="checkbox">
+                                <label class="chkswitch">
+                                    <input type="checkbox" id="Status" name="Status" ng-model="popup.Status">
+                                    <span class="swtslider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <label class="font-strong mt-3">Gösterim Tarih Aralığı</label>
+                        <div class="input-daterange input-group" id="datepicker">
+                            <input class="input-sm form-control" type="text" name="startDate" id="startDate" value="{{popup.StartDateStr}}" ng-model="popup.StartDateStr">
+                            <span class="input-group-addon p-l-10 p-r-10">-</span>
+                            <input class="input-sm form-control" type="text" name="endDate" id="endDate" value="{{popup.EndDateStr}}" ng-model="popup.EndDateStr">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12">
+                        <div class="ibox bg-silver-100 mb-0">
+                            <div class="ibox-head">
+                                <div class="ibox-title">Metinler</div>
+                                <ul class="nav nav-tabs tabs-line pull-right">
+                                    <li class="nav-item" ng-repeat="lang in languageList">
+                                        <a class="nav-link" data-toggle="tab" href="#menu{{lang.Id}}">{{lang.LangName}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="ibox-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="menu{{detail.LanguageId}}" ng-repeat="detail in popup.Detail" on-finish-render="ngRepeatDetailFinished">
+                                        <div class="form-group row">
+                                            <label class="col-sm-12" for="LangCode">{{detail.Language}} Başlık</label>
+                                            <div class="col-sm-12">
+                                                <input type="text" class="form-control" id="popupTitle-{{detail.LanguageId}}" data-detailId="{{detail.DetailId}}" data-langNo="{{detail.LanguageId}}" ng-model="detail.Title">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12" for="LangCode">{{detail.Language}} Açıklama</label>
+                                            <div class="col-sm-12">
+                                                <textarea class="form-control" id="popupDescription-{{detail.LanguageId}}" ng-model="detail.Description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-12 mb-0">
+                        <div class="text-right">
+                            <button type="button" class="btn btn-primary" ng-click="viewPopup()">Önizle</button>
+                            <button type="button" class="btn btn-success" ng-click="savePopup()">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalModalLabel" aria-hidden="true">
+        <ul class="nav viewbtn">
+            <li class="nav-item" ng-repeat="lang in languageList">
+                <a class="nav-link" data-toggle="tab" href="#pmenu{{lang.Id}}">{{lang.LangName}}</a>
+            </li>
+        </ul>
+        <div class="modal-dialog " ng-class="popup.Size?'modal-lg':''" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-1" style="justify-content:flex-end;">
+                    <button type="button" class="close closepopup" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal row">
+                        <div ng-show="popup.Type==0||popup.Type==2" class="col-sm-12">
+                            <img ng-src="{{popup.PicturePath}}" class="img-responsive" alt="popup" id="pfileImg" />
+                        </div>
+                        <div ng-show="popup.Type==2" class="col-sm-12 mb-3"></div>
+                        <div ng-show="popup.Type==1||popup.Type==2" class="col-sm-12">
+
+                            <div class="tab-content">
+                                <div class="tab-pane" id="pmenu{{pdetail.LanguageId}}" ng-repeat="pdetail in popup.Detail" on-finish-render="ngRepeatDetailFinished">
+                                    <h6>{{pdetail.Title}}</h6>
+                                    <p class="mb-0">{{pdetail.Description}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section PageLevelStyles{
+    <link href="~/Content/Admin/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+
+    <style>
+        .viewbtn {
+            background: rgba(0,0,0,0.7);
+            padding-bottom: 5px;
+        }
+
+            .viewbtn li a {
+                background: white;
+                margin-left: 5px;
+                margin-top: 5px;
+                border-radius: 5px;
+                font-size: 10px;
+            }
+    </style>
+}
+@section PageLevelScripts
+{
+    <script src="~/Content/Admin/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="~/Content/Admin/vendors/bootstrap-datepicker/dist/locales/bootstrap-datepicker.tr.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/Admin/popup.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.input-daterange').datepicker({
+                keyboardNavigation: false,
+                language: 'tr',
+                forceParse: false,
+                autoclose: true
+            });
+
+        });
+    </script>
+}
+

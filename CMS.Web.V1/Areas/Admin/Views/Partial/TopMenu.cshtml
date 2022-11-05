@@ -1,0 +1,37 @@
+﻿<header class="header">
+    <div class="page-brand">
+        <a class="link" href="/admin">
+            <span class="brand">
+                <span class="brand-tip">Admin Panel</span>
+            </span>
+            <span class="brand-mini">APK</span>
+        </a>
+    </div>
+    <div class="flexbox flex-1">
+        <ul class="nav navbar-toolbar">
+            <li>
+                <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-toolbar">
+            <li class="dropdown dropdown-inbox">
+                <a class="nav-link dropdown-toggle" href="/admin/message/index">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge badge-primary envelope-badge">{{messageCount.InboxUnRead}}</span>
+                </a>
+            </li>
+
+            <li class="dropdown dropdown-user">
+                <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                    <!--<img src="./assets/img/logo.jpg" />-->
+                    <span>{{authorityUser.Name}}</span><i class="fa fa-angle-down m-l-5"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a class="dropdown-item" href="/"><i class="fa fa-link"></i>Siteye Git</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/login/logout"><i class="fa fa-power-off"></i>Çıkış</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>

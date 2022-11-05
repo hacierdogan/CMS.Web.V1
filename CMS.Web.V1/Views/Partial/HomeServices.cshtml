@@ -1,0 +1,26 @@
+﻿@using CMS.Web.V1.Models.Helper
+<section id="service">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="heading">
+                <h2>@(("Home.OurService.Title").toLanguage())</h2>
+                <div class="line"></div>
+                <p>
+                    @(("Home.OurService.Description").toLanguage())
+                </p>
+            </div>
+        </div>  <div class="features-sec">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-6 wow fadeInUp" data-wow-duration="300ms" data-wow-delay="0ms" ng-repeat="service in ourServiceList">
+                    <div class="media service-box">
+                        <div class="pull-left"> <i ng-class="service.Icon"></i> </div>
+                        <div class="media-body">
+                            <h5 class="media-heading">{{service.Detail[0].Title}}</h5>
+                            <p>{{service.Detail[0].Description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

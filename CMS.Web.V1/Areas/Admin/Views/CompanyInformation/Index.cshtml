@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Firma Bilgileri";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Firma Bilgileri</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Firma  Bilgilerini Güncelle</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="companyInformationController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Firma Bilgilerini Güncelle</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <form class="form-horizontal">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Adı</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Ünvanı</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.TradeName">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Adresi</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.Address">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Mail</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.Mail">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Telefon</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.Phone">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Fax</label>
+                    <div class="col-sm-10">
+                        <input class=" form-control" type="text" ng-model="company.Fax">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Logo</label>
+                    <div class="col-sm-4">
+                        <div class="form-group bg-grey-100 mb-0 text-center">
+                            <img ng-src="{{company.LogoPath}}" class="img-responsive " alt="slider" id="fileImg" />
+                            <input type="file" name="imageInput" id="imageInput" value="" accept=".jpg,.png,.JPEG,.jpeg" class="hidden" />
+                            <label for="imageInput" class="resimsec mb-0"><i class="fa fa-upload"></i> Resim Seç</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Firma Konumu (src)</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <a href="https://www.google.com/maps" target="_blank" class="btn"><i class="fa fa-map"></i></a>
+                            </div>
+                            <textarea type="text" class="form-control" ng-model="company.Location" aria-describedby="basic-addon2"></textarea>
+                        </div>
+                        <iframe id="map" src="" style="border:1px solid #555;width:100%;height:200px;margin-top:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-sm-12"></div>
+                <div class="form-group hidden">
+                    <label class="col-sm-2 col-form-label">sonuç</label>
+                    <div class="col-sm-10">
+                        <textarea class=" form-control" id="baseLogo" type="text" ng-model="company.LogoBasePath"></textarea>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button type="button" class="btn btn-primary" ng-click="showPdf()"><i class="fa fa-print"></i> Belge Oluştur</button>
+                    <button type="button" class="btn btn-success" ng-click="saveCompanyInformation()">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="mPdfShow" tabindex="-1" role="dialog" aria-labelledby="mPdfShowLabel" aria-hidden="true" class="modal fade" style="min-height:800px;width:100%">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <iframe style="min-height:500px;width:100%" id="pdfbox" ng-src=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+@section PageLevelStyles{
+
+}
+@section PageLevelScripts
+{
+    <script type="text/javascript" src="~/Scripts/Admin/company_information.js?@HttpContext.Current.Application["JSVer"]"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        });
+
+    </script>
+}
+
+
+

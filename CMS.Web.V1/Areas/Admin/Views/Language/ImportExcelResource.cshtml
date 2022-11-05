@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Excel Çeviri Girişi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Dil İşlemleri</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Toplu Çeviri Girişi</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="excelLanguageController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Toplu Çeviri Girişi</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <form class="form-horizontal">
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-2">
+                        <div class="input-group">
+                            <label class="input-group-addon">Yüklenecek Dil</label>
+                            <select id="language-select" name="language-select" ng-model="selectedLanguage" class="form-control" aria-describedby="basic-addon2" ">
+                                <option ng-repeat="language in languageList" value="{{language.LangCode}}">{{language.LangName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-2">
+                        <button class="btn btn-primary btn-block" ng-click="dowlandFile()"><i class="fa fa-download"></i> Türkçe Kaynak Dosyasını İndir</button>
+                    </div>
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-2 mb-2">
+                        <label class="btn btn-default btn-block">
+                            <i class="fa fa-folder-open-o fa-fw"></i> Gözat
+                            <input id="excel-input" type="file" style="display:none;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        </label>
+                    </div>
+                    <div class="col-sm-2 mb-2">
+                        <button class="btn btn-warning btn-block" ng-click="uploadResourceExcelFile()">Yükle</button>
+                    </div>
+                    <div class="col-sm-2 mb-2">
+                        <button class="btn btn-success btn-block" ng-click="saveResourceExcel()">Kaydet</button>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="nav nav-tabs tabs-line">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#tab-succes" data-toggle="tab"><i class="fa fa-check-square text-success"></i> Başarılı Çeviriler <span ng-show="uploadlist.SuccessList.length>0">({{uploadlist.SuccessList.length}})</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-error" data-toggle="tab"><i class="fa fa-warning text-danger"></i> Başarısız Çeviriler <span ng-show="uploadlist.ErrorList.length>0">({{uploadlist.ErrorList.length}})</span></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-succes">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Dil Kodu</th>
+                                <th>Dil Anahtarı</th>
+                                <th>Çeviri</th>
+                                <th class="text-center">Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <tr ng-repeat="successResource in uploadlist.SuccessList">
+                                <td>{{$index + 1}}</td>
+                                <td>{{successResource.LangCode}}</td>
+                                <td>{{successResource.ResourceKey}}</td>
+                                <td>{{successResource.ResourceValue}}</td>
+                                <td class="text-center"><i class="fa fa-check text-success"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="tab-error">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Dil Kodu</th>
+                                <th>Dil Anahtarı</th>
+                                <th>Çeviri</th>
+                                <th class="text-center">Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="errorResource in uploadlist.ErrorList">
+                                <td>{{$index + 1}}</td>
+                                <td>{{errorResource.LangCode}}</td>
+                                <td>{{errorResource.ResourceKey}}</td>
+                                <td>{{errorResource.ResourceValue}}</td>
+                                <td class="text-center"><i class="fa fa-warning text-danger"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section PageLevelStyles
+{
+    <link href="~/Content/Admin/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+
+    <style>
+        input#file-upload-button {
+            background-color: red;
+        }
+    </style>
+}
+@section PageLevelScripts
+{
+    <script src="~/Content/Admin/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/js/jszip.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/xlsx.full.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/FileSaver.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/Admin/excel_language_resource.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        });
+
+    </script>
+}
+

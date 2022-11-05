@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "CMS Web V1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div ng-controller="homeController">
+    @{Html.RenderAction("HomeSlider", "Partial");}
+    @{Html.RenderAction("HomeAbout", "Partial");}
+    @{Html.RenderAction("HomeServices", "Partial");}
+    @{Html.RenderAction("HomeTabs", "Partial");}
+    @{Html.RenderAction("HomeGallery", "Partial");}
+    @{Html.RenderAction("HomeComments", "Partial");}
+    @{Html.RenderAction("HomeCounts", "Partial");}
+    @{Html.RenderAction("HomeBlog", "Partial");}
+    @{Html.RenderAction("HomeReferences", "Partial");}
+    @{Html.RenderAction("HomeContact", "Partial");}
+    @{Html.RenderAction("_Popup", "Partial");}
+</div>
+
+@section Styles
+{
+
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/Pages/home.js?@HttpContext.Current.Application["JSVer"]"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}

@@ -1,0 +1,15 @@
+﻿@using CMS.Web.V1.Models.Helper
+<footer id="footer">
+    <div class="bg-sec">
+        <div class="container">
+            <h2>@(("Layout.Footer.Slogan").toLanguage())</h2>
+        </div>
+    </div>
+</footer>
+<footer id="footer-down">
+    @{Html.RenderAction("_SocialMedia", "Partial");}
+    <p>
+        &copy; Copyright @DateTime.Now.Year  WebCMS_V1 - Created By
+        <a href="https://www.hacierdogan.tr.gg/" class="signature" target="_blank" data-toggle="tooltip" title="Hacı Erdoğan">HE Software</a>
+    </p>
+</footer>

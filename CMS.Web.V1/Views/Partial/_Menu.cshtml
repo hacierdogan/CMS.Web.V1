@@ -1,0 +1,60 @@
+﻿@using CMS.Web.V1.Models.Helper
+@using CMS.Web.V1.Models.Entity
+@{
+    ThemeSetting currentSetting = HttpContext.Current.Session["CurrentSetting"] != null ? (ThemeSetting)HttpContext.Current.Session["CurrentSetting"] : new ThemeSetting();
+}
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/admin"><img src="~/Files/Upload/company_images/logo.png" alt=""></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a class="scroll" href="#menu"><i class="fa fa-home"></i></a></li>
+                    <li><a class="scroll" href="#about">@(("Layout.Menu.About").toLanguage())</a></li>
+                    <li><a class="scroll" href="#service">@(("Layout.Menu.Services").toLanguage())</a></li>
+                    <li><a class="scroll" href="#portfolio">@(("Layout.Menu.Portfolio").toLanguage())</a></li>
+                    <li><a class="scroll" href="#blog">@(("Layout.Menu.Blog").toLanguage())</a></li>
+                    <li><a class="scroll" href="#contact">@(("Layout.Menu.Contact").toLanguage())</a></li>
+                    <li class="dropdown" ng-if="languageList.length>1">
+                        <a class="dropdown-toggle languagebtn" id="langMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="flag-icon {{selectedLanguage.FlagCode}}"></span>
+                        </a>
+                        <ul class="dropdown-menu languagemenu" aria-labelledby="langMenu">
+                            @if (currentSetting.LanguageType == "name")
+                            {
+                            <li ng-repeat="item in languageList">
+                                <!--ng-if="CurrentSessions.CurrentSetting.LanguageType=='name'"-->
+                                <a class="flags" href="/home/ChangeLanguage/{{item.LangCode}}"><span>{{item.LangName}}</span></a>
+                            </li>
+                            }
+                            else if (currentSetting.LanguageType == "code")
+                            {
+                                <li ng-repeat="item in languageList">
+                                    <a class="flags" href="/home/ChangeLanguage/{{item.LangCode}}"><span style=" text-transform: capitalize;">{{item.LangCode}}</span></a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li ng-repeat="item in languageList">
+                                    <a class="flags" href="/home/ChangeLanguage/{{item.LangCode}}"><span class="flag-icon {{item.FlagCode}}"></span></a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

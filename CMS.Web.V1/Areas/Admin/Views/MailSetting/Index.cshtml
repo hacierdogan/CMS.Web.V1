@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Mail Server";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-heading">
+    <h1 class="page-title">Mail Server</h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html"><i class="la la-home font-20"></i></a>
+        </li>
+        <li class="breadcrumb-item">Mail Server Ayarları</li>
+    </ol>
+</div>
+<div class="page-content fade-in-up" ng-controller="mailSettingController">
+    <div class="ibox ibox-primary">
+        <div class="ibox-head">
+            <div class="ibox-title">Mail Server Ayarları</div>
+            <div class="ibox-tools">
+                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+            </div>
+        </div>
+        <div class="ibox-body">
+            <div class="form-horizontal row">
+                <div class="col-sm-12">
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Mail Sunucu Hostu</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="mail.Host">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Mail Host Portu</label>
+                        <div class="col-sm-2">
+                            <input type="number" min="0" maxlength="3" class="form-control" ng-model="mail.Port">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">SSL Kullanımı</label>
+                        <div class="col-sm-3">
+                            <div class="checkbox">
+                                <label class="chkswitch">
+                                    <input type="checkbox" ng-model="mail.SSL">
+                                    <span class="swtslider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Gönderici Eposta Adresi</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="mail.From">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Gönderici Eposta Şifresi</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="mail.Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3" for="LangCode">Alıcı Eposta Adresi</label>
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="mail.To" aria-describedby="basic-addon2">
+                                <span class="input-group-addon picker-button cp" id="basic-addon2" ng-click="mailTest()">Test Maili Gönder</span>
+                            </div>
+                            <small class="help-block text-muted">Birden fazla alıcı mail adresi tanımlamak için " ; " kullanın.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-0 row">
+                        <div class="col-sm-12 text-right">
+                            <button type="button" class="btn btn-success" ng-click="saveMailSetting()">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageLevelStyles{
+}
+@section PageLevelScripts
+{
+    <script src="~/Scripts/Admin/mailsetting.js?@HttpContext.Current.Application["JSVer"]" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+        });
+    </script>
+}
+

@@ -1,0 +1,23 @@
+﻿@model CMS.Web.V1.Models.Entity.Seo
+
+<meta property="og:locale" content="tr_TR" />
+<meta http-equiv="content-language" content="@HttpContext.Current.Session["CurrentLanguageCode"]" /><!--Site varsayılan dili -->
+<meta name="robots" content="index, follow" /><!--Sayfanın arama motorlarında listelenip listelenmemesi. Panel için -> content="noindex,nofollow" yazılmalıdır. -->
+
+<meta name="owner" content="@Model.Owner" /><!--Site sahibi-->
+<meta name="Author" content="@Model.Author" /><!--site yoneticisi-->
+<meta name="Copyright" content="@Model.Year" /><!--Sitenin kuruldugu yil "(c)2019" -->
+<meta name="Abstract" content="@Model.Description" /><!--Sitenizin özetinin kısa bilgisini verir.-->
+<!-- Site Resim -->
+<meta itemprop="image" content="" /><!--google icin image-->
+<meta name="twitter:image:src" content="" /><!--twitter icin image-->
+<meta property="og:image" content="" /><!--facebook icin image-->
+<!-- Anahtar Kelimeler Max 5 Kelime -->
+<meta name="keywords" content="@Model.Keywords" />
+<!-- Site Aciklamasi Max 115 Karakter -->
+<meta name="description" content="@Model.Description" />
+<meta itemprop="description" content="@Model.Description"><!--google icin-->
+<meta property="og:description" content="@Model.Description" /><!--facebook icin-->
+<meta name="twitter:description" content="@Model.Description" /><!--twitter icin-->
+
+@Html.Raw(Model.GoogleAnalytic)

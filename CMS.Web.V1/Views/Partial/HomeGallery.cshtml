@@ -1,0 +1,32 @@
+﻿@using CMS.Web.V1.Models.Helper
+@using CMS.Web.V1.Models.Entity
+<section id="portfolio">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="heading">
+                <h2>@(("Home.Portfolio.Title").toLanguage())</h2>
+                <div class="line"></div>
+                <p>
+                    @(("Home.Portfolio.Description").toLanguage())
+                </p>
+            </div>
+        </div>
+        <div class="text-center">
+            <ul class="portfolio-filter">
+                <li><a class="active" href="" data-filter="*">@(("Home.Portfolio.All").toLanguage())</a></li>
+                <li ng-repeat="button in buttonList"><a href="" data-filter=".{{button}}">{{button}}</a></li>
+            </ul>
+        </div>
+        <div class="portfolio-items">
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item {{gallery.Detail[0].ButtonText}}" ng-repeat="gallery in galleryList" on-finish-render="ngRepeatGalleryFinished">
+                <div class="portfolio-item-inner">
+                    <img class="img-responsive" ng-src="{{gallery.PicturePath}}" alt="{{gallery.Detail[0].ButtonText}}">
+                    <div class="portfolio-info">
+                        <a class="preview" href="{{gallery.PicturePath}}" data-rel="prettyPhoto"><i class="fa fa-plus-circle"></i></a>
+                        <p>{{gallery.Detail[0].Title}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
