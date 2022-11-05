@@ -6,13 +6,14 @@ PROJE DETAYI:
 PROJE ÖZELLİKLERİ: 
 + Çoklu dil desteği
 + Mesaj yönetimi(Gelen, favori, arşiv)
-+ Slider işlemleri
++ Slider işlemleri(Tarih aralığında aktif/pasif)
 + Popup işlemleri (Tarih aralığında aktif/pasif)  
 + Sayfa içerik düzenlemeleri(Html editör) 
 + SEO yapılandırması
-+ User rol işlemleri
++ User rol işlemleri (Yetkilendirme)
 + Kullanıcı işlemleri (Giriş, Beni hatırla, Şifremi unuttum)
 + Tema ayarları (Yapılandırma ve renklendirme)
 + Firma bilgi güncelleme ve belge oluşturma.
 
-PROJE İÇERİĞİ: C#, .Net MVC, Html + Css Bootstrap, AngularJS, TypeScrpt, Ajax, Javascript, MsSQL, Adonet, LinqToSql, Panel Pluginleri
+PROJE İÇERİĞİ: 
+C#, .Net MVC, Html + Css Bootstrap, AngularJS, TypeScrpt, Ajax, Javascript, MsSQL, Adonet, LinqToSql, Panel Pluginleri
